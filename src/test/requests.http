@@ -1,0 +1,32 @@
+
+
+### Create a single hotel
+POST http://localhost:7076/api/v1/hotels
+Content-Type: application/json
+
+{
+  "name": "Hotellet",
+  "address": "Oehlenschlægersgade 17, sal 1sal, 1663 København",
+  "rooms": []
+}
+
+### GetAllHotels
+GET http://localhost:7076/api/v1/hotels
+
+### Create a single room
+
+
+### GetHotelByID
+
+
+
+### UpdateHotel
+
+### AddRoom
+
+### GetRoomsByHotel
+
+### RemoveRoom
+
+### DeleteHotel
+
