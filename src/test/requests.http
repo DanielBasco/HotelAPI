@@ -7,26 +7,61 @@ Content-Type: application/json
 {
   "name": "Hotellet",
   "address": "Oehlenschlægersgade 17, sal 1sal, 1663 København",
-  "rooms": []
+  "rooms": [
+    {
+      "number": 22,
+      "price": 250.0
+    },
+    {
+      "number": 24,
+      "price": 255.0
+    }
+  ]
 }
+### Create single room | Ligegyldig :(
+POST http://localhost:7076/api/v1/rooms
+Content-Type: application/json
+
+{
+"number": 240,
+"price": 250
+    }
 
 ### GetAllHotels
 GET http://localhost:7076/api/v1/hotels
 
-### Create a single room
-
 
 ### GetHotelByID
-
-
+GET http://localhost:7076/api/v1/hotels/1
 
 ### UpdateHotel
+PUT http://localhost:7076/api/v1/hotels/1
+Content-Type: application/json
+
+{
+  "name": "Hotellet update uden rum",
+  "address": "Oehlenschlægersgade 17, sal 1sal, 1663 København",
+  "rooms": []
+}
+
 
 ### AddRoom
+POST http://localhost:7076/api/v1/hotels/1/rooms
+Content-Type: application/json
 
-### GetRoomsByHotel
+{
+  "number": 44,
+  "price": 800.0
+}
 
 ### RemoveRoom
+DELETE http://localhost:7076/api/v1/hotels/1/rooms/3
+Content-Type: application/json
+
+
+### GetRoomsByHotel
+GET http://localhost:7076/api/v1/hotels/1/rooms
+Content-Type: application/json
 
 ### DeleteHotel
-
+DELETE http://localhost:7076/api/v1/hotels/1

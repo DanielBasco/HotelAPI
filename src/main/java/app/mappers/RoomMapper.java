@@ -10,8 +10,6 @@ public class RoomMapper {
         room.setId(roomDTO.getId());
         room.setPrice(roomDTO.getPrice());
         room.setNumber(roomDTO.getNumber());
-        room.setHotelId(roomDTO.getHotelId());
-        room.setHotel(HotelMapper.toEntity(roomDTO.getHotelDTO()));
         return room;
     }
 
@@ -20,8 +18,9 @@ public class RoomMapper {
         roomDTO.setId(room.getId());
         roomDTO.setPrice(room.getPrice());
         roomDTO.setNumber(room.getNumber());
-        roomDTO.setHotelId(room.getHotelId());
-        roomDTO.setHotelDTO(HotelMapper.toDTO(room.getHotel()));
+        if( roomDTO.getId() != null ) {
+            roomDTO.setHotelId(room.getHotelId());
+        }
         return roomDTO;
     }
 

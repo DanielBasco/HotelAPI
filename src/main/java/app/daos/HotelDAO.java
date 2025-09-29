@@ -18,7 +18,8 @@ public class HotelDAO implements IDAO<Hotel, Integer>{
     @Override
     public List<Hotel> getAll() {
         try(EntityManager em = emf.createEntityManager()){
-            return em.createQuery("SELECT h FROM Hotel h", Hotel.class).getResultList();
+            //JOIN FETCH gør rooms også bliver hentet med det samme. Distinct gør jeg ikke får dupletter
+            return em.createQuery("SELECT DISTINCT h FROM Hotel h LEFT JOIN FETCH h.rooms", Hotel.class).getResultList();
         }
     }
 
@@ -48,7 +49,15 @@ public class HotelDAO implements IDAO<Hotel, Integer>{
            if(managedHotel != null){
                managedHotel.setName(hotel.getName());
                managedHotel.setAddress(hotel.getAddress());
-               managedHotel.setRooms(hotel.getRooms());
+
+               //Fjerner de muligvis gamle rum fra db
+               managedHotel.getRooms().clear();
+               //Derefter tilføjer de eksisterende rum
+               if(hotel.getRooms() != null){
+                   hotel.getRooms().forEach(r -> r.setHotel(managedHotel));
+                   managedHotel.getRooms().addAll(hotel.getRooms());
+               }
+
                em.getTransaction().commit();
                return managedHotel;
            } else {
@@ -99,8 +108,11 @@ public class HotelDAO implements IDAO<Hotel, Integer>{
         try(EntityManager em = emf.createEntityManager()){
             em.getTransaction().begin();
             Hotel managedHotel = em.find(Hotel.class, hotel.getId());
-            if(managedHotel != null){
-                managedHotel.removeRoomToEntity(room);
+            Room managedRoom = em.find(Room.class, room.getId());
+
+            if(managedHotel != null && managedRoom != null){
+                managedHotel.getRooms().remove(managedRoom); //fjerner relation
+              managedRoom.setHotel(null);
                 em.getTransaction().commit();
                 return true;
             } else {
@@ -113,8 +125,8 @@ public class HotelDAO implements IDAO<Hotel, Integer>{
 
     public List<Room> getRoomsForHotel(Hotel hotel) {
         try(EntityManager em = emf.createEntityManager()){
-            return em.createQuery("SELECT r FROM Room r WHERE r.hotelId = :hotelId", Room.class)
-                    .setParameter("hotelId", hotel.getId())
+            return em.createQuery("SELECT r FROM Room r WHERE r.hotel = :hotel", Room.class)
+                    .setParameter("hotel", hotel)
                     .getResultList();
         }
     }

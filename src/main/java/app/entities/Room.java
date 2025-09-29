@@ -15,11 +15,11 @@ import lombok.*;
 public class Room {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private int hotelId;
     private int number;
     private double price;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Hotel hotel;
 }

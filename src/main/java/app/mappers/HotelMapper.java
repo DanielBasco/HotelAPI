@@ -2,18 +2,26 @@ package app.mappers;
 
 import app.dtos.HotelDTO;
 import app.entities.Hotel;
+import app.entities.Room;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HotelMapper {
 
     public static Hotel toEntity(HotelDTO hotelDTO) {
         Hotel hotel = new Hotel();
-        hotel.setId(hotelDTO.getId());
+        if( hotelDTO.getId() != null ) {
+            hotel.setId(hotelDTO.getId());
+        }
         hotel.setName(hotelDTO.getName());
         hotel.setAddress(hotelDTO.getAddress());
-        hotel.setRooms(
-                hotelDTO.getRooms().stream()
+        List<Room> rooms = hotelDTO.getRooms().stream()
                         .map(RoomMapper::toEntity)
-                        .toList());
+                        .toList();
+        //Relation sættes her begge veje
+        rooms.forEach(r -> r.setHotel(hotel));
+        hotel.setRooms(rooms);
         return hotel;
     }
 

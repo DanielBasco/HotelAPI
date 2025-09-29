@@ -8,9 +8,9 @@ import java.util.List;
 @Data
 public class HotelDTO {
 
-    private int id;
+    private Integer id;
     private String name;
     private String address;
-    List<RoomDTO> rooms;
+    private List<RoomDTO> rooms;
 
 }

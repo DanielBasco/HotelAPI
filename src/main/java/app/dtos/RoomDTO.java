@@ -7,7 +7,7 @@ import lombok.Data;
 public class RoomDTO {
 
     private Integer id;
-    private int hotelId;
+    private Integer hotelId;
     private int number;
     private double price;
 

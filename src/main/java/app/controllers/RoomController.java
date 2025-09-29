@@ -16,7 +16,9 @@ public class RoomController implements IC<Context> {
     private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
 
     //Dependency injection så jeg kan teste med getEntityManagerFactoryTest
-
+        public RoomController(EntityManagerFactory emf) {
+            this.roomDAO = new RoomDAO(emf);
+        }
 
     @Override
     public void create(Context context) {
@@ -29,6 +31,7 @@ public class RoomController implements IC<Context> {
 
             context.status(200).json(RoomMapper.toDTO(roomdb));
         } catch (Exception e) {
+            e.printStackTrace();
             context.status(500).result(e.getMessage()+" Something went wrong with creating a room");
         }
     }

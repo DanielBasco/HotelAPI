@@ -25,7 +25,9 @@ public class Hotel {
     private String name;
     private String address;
 
-    @OneToMany(mappedBy = "hotel")
+    //Eager gør at værdierne i rooms bliver sat med det samme så de ikke er null.
+    // orphanRemoval gør at at når det fjernes fra listen sker det også i db når der er transaction commit
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     @ToString.Exclude
     private List<Room> rooms = new ArrayList<>();
@@ -35,11 +37,5 @@ public class Hotel {
         rooms.add(room);
         // Bi-directional så det også gemmes for begge entiteter
         room.setHotel(this);
-    }
-
-    public void removeRoomToEntity(Room room){
-        rooms.remove(room);
-        // null skal sættes på så man fjerner den nuværende relation mellem rummet og hotellet
-        room.setHotel(null);
     }
 }
