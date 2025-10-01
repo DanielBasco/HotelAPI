@@ -12,11 +12,14 @@ import java.util.List;
 
 public class RoomController implements IC<Context> {
 
+
+    private EntityManagerFactory emf;
     private RoomDAO roomDAO;
-    private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+
 
     //Dependency injection så jeg kan teste med getEntityManagerFactoryTest
         public RoomController(EntityManagerFactory emf) {
+            this.emf = emf;
             this.roomDAO = new RoomDAO(emf);
         }
 

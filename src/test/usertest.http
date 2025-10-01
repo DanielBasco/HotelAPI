@@ -1,0 +1,22 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### Create User
+POST http://localhost:7076/api/v1/auth/create
+Content-Type: application/json
+
+{
+ "username": "Daniel",
+  "password": "AsgerTagerSteroiderISmug123"
+}
+
+
+### Login
+POST http://localhost:7076/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "Daniel",
+  "password": "AsgerTagerSteroiderISmug123"
+}

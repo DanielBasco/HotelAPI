@@ -16,11 +16,15 @@ import java.util.List;
 
 public class HotelController implements IC<Context>{
 
+    private EntityManagerFactory emf;
+    private HotelDAO hotelDAO;
+    private RoomDAO roomDAO;
 
-    private final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-    private HotelDAO hotelDAO = new HotelDAO(emf);
-    private RoomDAO roomDAO = new RoomDAO(emf);
-
+    public HotelController(EntityManagerFactory emf) {
+        this.emf = emf;
+         this.hotelDAO = new HotelDAO(emf);
+         this.roomDAO = new RoomDAO(emf);
+    }
     //Dependency injection så jeg kan teste med getEntityManagerFactoryTest
 
 

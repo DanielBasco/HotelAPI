@@ -9,10 +9,12 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class RoomRoutes {
 
-    private EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-
-
-    private RoomController roomController = new RoomController(emf);
+    private EntityManagerFactory emf;
+    private RoomController roomController;
+    public RoomRoutes(EntityManagerFactory emf){
+        this.emf = emf;
+        this.roomController = new RoomController(emf);
+    }
 
 
     public EndpointGroup getRoutes(){

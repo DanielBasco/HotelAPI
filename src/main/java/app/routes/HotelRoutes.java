@@ -8,7 +8,14 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class HotelRoutes {
 
-    private HotelController hotelController = new HotelController();
+    private EntityManagerFactory emf;
+    private HotelController hotelController;
+    public HotelRoutes(EntityManagerFactory emf){
+        this.emf = emf;
+        this.hotelController = new HotelController(emf);
+    }
+
+
 
 
     public EndpointGroup getRoutes(){
