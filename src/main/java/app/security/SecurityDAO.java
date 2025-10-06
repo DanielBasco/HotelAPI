@@ -17,7 +17,7 @@ public class SecurityDAO implements ISecurityDAO{
     public User getVerifiedUser(String username, String password) {
         try(EntityManager em = emf.createEntityManager()){
             User foundUser = em.find(User.class, username);
-            if(foundUser.checkPassword(foundUser.getPassword())){
+            if(foundUser != null && foundUser.checkPassword(password)){
                 return foundUser;
             } else
                 throw new SecurityException("User or password incorrect");

@@ -7,8 +7,8 @@ POST http://localhost:7076/api/v1/auth/create
 Content-Type: application/json
 
 {
- "username": "Daniel",
-  "password": "AsgerTagerSteroiderISmug123"
+ "username": "Test10",
+  "password": "Test1"
 }
 
 
@@ -17,6 +17,6 @@ POST http://localhost:7076/api/v1/auth/login
 Content-Type: application/json
 
 {
-  "username": "Daniel",
-  "password": "AsgerTagerSteroiderISmug123"
+  "username": "Test10",
+  "password": "Test1"
 }

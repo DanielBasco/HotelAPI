@@ -14,9 +14,8 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @Column (name = "username", nullable = true)
+    @Column (name = "rolename", nullable = false)
     private String rolename;
-    private String password;
 
     @ManyToMany (mappedBy = "roles")
     private Set<User> users;
